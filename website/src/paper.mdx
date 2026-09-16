@@ -1,0 +1,72 @@
+---
+title: "HALTER: A Graph-Based Harness for Autonomous Long-Horizon Manipulation Evaluation"
+theme: light
+description: "An evaluation harness that scores a long-horizon rollout on real hardware and restores the scene for the next one, by planning over a library of learned atomic reset skills."
+---
+
+import Header from "./components/Header.astro";
+import HighlightedSection from "./components/HighlightedSection.astro";
+
+<Header
+  title="From Rollout to Reset: A Graph-Based Harness for Autonomous Long-Horizon Manipulation Evaluation"
+  subtitle="Scoring a long-horizon rollout on real hardware, and resetting the scene for the next one, without a human in the loop."
+  authors={[
+    {
+      name: "Jing Jiang",
+      institution: "KIT",
+      notes: ["1", "*"],
+    },
+    {
+      name: "Yue Yang",
+      url: "https://yy-gx.github.io/",
+      institution: "UNC Chapel Hill",
+      notes: ["2", "*"],
+    },
+    {
+      name: "Xinkai Jiang",
+      institution: "KIT",
+      notes: ["1"],
+    },
+    {
+      name: "Gedas Bertasius",
+      url: "https://www.gedasbertasius.com/",
+      institution: "UNC Chapel Hill",
+      notes: ["2"],
+    },
+    {
+      name: "Daniel J. Szafir",
+      url: "https://cs.unc.edu/person/daniel-szafir/",
+      institution: "UNC Chapel Hill",
+      notes: ["2"],
+    },
+    {
+      name: "Rudolf Lioutikov",
+      institution: "KIT",
+      notes: ["1", "†"],
+    },
+  ]}
+  notes={[
+    { symbol: "1", text: "Karlsruhe Institute of Technology" },
+    {
+      symbol: "2",
+      text: "Department of Computer Science, University of North Carolina at Chapel Hill",
+    },
+    { symbol: "*", text: "Equal contribution" },
+    { symbol: "†", text: "Corresponding author: lioutikov@kit.edu" },
+  ]}
+  links={[
+    { name: "Code", url: "https://github.com/YY-GX/HALTER", icon: "ri:github-line" },
+  ]}
+/>
+
+<HighlightedSection>
+
+## Abstract
+
+Robot manipulation policies are improving quickly, and real-robot evaluation remains the standard evidence for that progress. It still relies on a human to reset the scene between rollouts, which consumes operator time and leaves the initial state distribution unspecified, so results reproduce poorly. A recent system, AutoEval, automates both reset and scoring, but only for single-step tasks, because a long-horizon rollout can terminate in combinatorially many configurations that no single learned reset policy covers. We present **HALTER**, a Harness for Autonomous Long-horizon Task Evaluation and Reset, which restores the scene by planning over a library of learned atomic reset skills, so demonstration cost scales with the size of that library rather than with the number of terminal states. HALTER builds a spatial scene graph online from point clouds and vision foundation models, and an LLM reasons over this graph to score the rollout, plan the reset, and verify that the reset succeeded, without collecting labeled success images for any task. On four long-horizon tasks on a Franka arm, HALTER restores the scene in **76%** of episodes, against 52% for AutoEval and 65% for a motion-planning reset, and it estimates the completed-skill fraction correctly in **90%** of episodes, against 76%. Its reset-verification verdict is correct in **91%** of episodes, compared with 78% for AutoEval. It also cuts the operator time of an evaluation campaign by **72%** relative to manual reset. We further measure compositional generalization on three held-out tasks, where HALTER resets **74.7%** of episodes against 1.3% for a per-task reset policy, and we ablate the scene representation and the graph update rate.
+
+</HighlightedSection>
+
+<p class="not-prose text-muted-foreground mx-auto mt-10 max-w-[50rem] px-6 text-center text-sm">
+  Paper, video, and code are on the way.
+</p>
