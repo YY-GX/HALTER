@@ -58,15 +58,15 @@ const hasBackground = Astro.slots.has("background");
         : "gap-5",
     ]}
   >
-    <Image
-      src={siteIcon}
-      alt=""
-      width={72}
-      height={72}
-      class="my-0 h-16 w-16 rounded-2xl sm:h-[4.5rem] sm:w-[4.5rem]"
-    />
-    <h1 class="my-0 -mt-1 text-4xl leading-tight font-medium tracking-tight text-balance sm:text-5xl">
-      {title}
+    <h1 class="my-0 text-4xl leading-tight font-medium tracking-tight text-balance sm:text-5xl">
+      <Image
+        src={siteIcon}
+        alt=""
+        width={128}
+        height={128}
+        densities={[1, 2]}
+        class="my-0 mr-2 inline-block h-[0.95em] w-[0.95em] translate-y-[-0.06em] align-middle"
+      />{title}
     </h1>
     {
       subtitle && (
