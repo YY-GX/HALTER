@@ -1,5 +1,7 @@
 ---
 import { Icon } from "astro-icon/components";
+import { Image } from "astro:assets";
+import siteIcon from "../assets/icon.png";
 
 type Author = {
   name: string;
@@ -56,7 +58,14 @@ const hasBackground = Astro.slots.has("background");
         : "gap-5",
     ]}
   >
-    <h1 class="my-0 text-4xl leading-tight font-medium tracking-tight text-balance sm:text-5xl">
+    <Image
+      src={siteIcon}
+      alt=""
+      width={72}
+      height={72}
+      class="my-0 h-16 w-16 rounded-2xl sm:h-[4.5rem] sm:w-[4.5rem]"
+    />
+    <h1 class="my-0 -mt-1 text-4xl leading-tight font-medium tracking-tight text-balance sm:text-5xl">
       {title}
     </h1>
     {

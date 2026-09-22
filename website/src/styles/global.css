@@ -34,6 +34,9 @@ html {
 :root {
   color-scheme: light;
   --maximum-text-width: 44rem;
+  /* Figures and result tables share this, so every block lines up with
+     the body text. Widen it here to widen all of them at once. */
+  --media-width: 44rem;
   --minimum-inline-margin: 1.5rem;
   --actual-inline-margin: max(
     var(--minimum-inline-margin),

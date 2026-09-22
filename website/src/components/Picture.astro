@@ -15,7 +15,7 @@ const {
   alt,
   priority = false,
   invertInDarkMode = false,
-  sizes = "(min-width: 46rem) 40rem, 100vw",
+  sizes = "(min-width: 47rem) 44rem, 100vw",
 } = Astro.props;
 
 let image: ImageMetadata;
@@ -28,7 +28,7 @@ if (typeof src === "string") {
 ---
 
 <AstroPicture
-  class={`rounded-lg max-h-[calc(100svh-3rem)] max-w-full w-min mx-auto ${invertInDarkMode ? "dark:invert" : ""}`}
+  class={`rounded-lg max-h-[calc(100svh-3rem)] max-w-full w-full mx-auto ${invertInDarkMode ? "dark:invert" : ""}`}
   src={image}
   alt={alt}
   layout="constrained"
