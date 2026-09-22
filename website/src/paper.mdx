@@ -2,62 +2,57 @@
 title: "HALTER: A Graph-Based Harness for Autonomous Long-Horizon Manipulation Evaluation"
 theme: light
 description: "An evaluation harness that scores a long-horizon rollout on real hardware and restores the scene for the next one, by planning over a library of learned atomic reset skills."
+thumbnail: videos/overview-poster.jpg
 ---
 
 import Header from "./components/Header.astro";
 import HighlightedSection from "./components/HighlightedSection.astro";
+import Contents from "./components/Contents.astro";
+import Figure from "./components/Figure.astro";
+import Picture from "./components/Picture.astro";
+import TwoColumns from "./components/TwoColumns.astro";
+import Video from "./components/Video.astro";
+import ResultsTable from "./components/ResultsTable.astro";
+import KeyNumbers from "./components/KeyNumbers.astro";
+
+import teaser from "./assets/teaser.png";
+import framework from "./assets/framework.png";
+import tasks from "./assets/tasks.png";
+import ablation from "./assets/ablation.png";
 
 <Header
   title="From Rollout to Reset: A Graph-Based Harness for Autonomous Long-Horizon Manipulation Evaluation"
   subtitle="Scoring a long-horizon rollout on real hardware, and resetting the scene for the next one, without a human in the loop."
   authors={[
-    {
-      name: "Jing Jiang",
-      institution: "KIT",
-      notes: ["1", "*"],
-    },
-    {
-      name: "Yue Yang",
-      url: "https://yy-gx.github.io/",
-      institution: "UNC Chapel Hill",
-      notes: ["2", "*"],
-    },
-    {
-      name: "Xinkai Jiang",
-      url: "https://xinkai-jiang.github.io/",
-      institution: "KIT",
-      notes: ["1"],
-    },
-    {
-      name: "Gedas Bertasius",
-      url: "https://www.gedasbertasius.com/",
-      institution: "UNC Chapel Hill",
-      notes: ["2"],
-    },
-    {
-      name: "Daniel J. Szafir",
-      url: "https://cs.unc.edu/person/daniel-szafir/",
-      institution: "UNC Chapel Hill",
-      notes: ["2"],
-    },
-    {
-      name: "Rudolf Lioutikov",
-      url: "https://rudolf.intuitive-robots.net/",
-      institution: "KIT",
-      notes: ["1", "†"],
-    },
+    { name: "Jing Jiang", institution: "KIT", notes: ["1", "*"] },
+    { name: "Yue Yang", url: "https://yy-gx.github.io/", institution: "UNC Chapel Hill", notes: ["2", "*"] },
+    { name: "Xinkai Jiang", url: "https://xinkai-jiang.github.io/", institution: "KIT", notes: ["1"] },
+    { name: "Gedas Bertasius", url: "https://www.gedasbertasius.com/", institution: "UNC Chapel Hill", notes: ["2"] },
+    { name: "Daniel J. Szafir", url: "https://cs.unc.edu/person/daniel-szafir/", institution: "UNC Chapel Hill", notes: ["2"] },
+    { name: "Rudolf Lioutikov", url: "https://rudolf.intuitive-robots.net/", institution: "KIT", notes: ["1", "†"] },
   ]}
   notes={[
     { symbol: "1", text: "Karlsruhe Institute of Technology" },
-    {
-      symbol: "2",
-      text: "Department of Computer Science, University of North Carolina at Chapel Hill",
-    },
+    { symbol: "2", text: "Department of Computer Science, University of North Carolina at Chapel Hill" },
     { symbol: "*", text: "Equal contribution" },
     { symbol: "†", text: "Corresponding author: lioutikov@kit.edu" },
   ]}
   links={[
+    { name: "arXiv", url: "https://arxiv.org/abs/2609.19413", icon: "academicons:arxiv" },
     { name: "Code", url: "https://github.com/YY-GX/HALTER", icon: "ri:github-line" },
+  ]}
+/>
+
+<Contents
+  items={[
+    { id: "why-long-horizon-reset-is-hard", label: "Problem" },
+    { id: "how-halter-works", label: "Method" },
+    { id: "tasks", label: "Tasks" },
+    { id: "evaluating-and-resetting-four-real-tasks", label: "Results" },
+    { id: "composing-skills-for-held-out-tasks", label: "Held-out tasks" },
+    { id: "what-the-graph-buys", label: "Ablation" },
+    { id: "limitations", label: "Limitations" },
+    { id: "bibtex", label: "Cite" },
   ]}
 />
 
@@ -65,10 +60,162 @@ import HighlightedSection from "./components/HighlightedSection.astro";
 
 ## Abstract
 
-Robot manipulation policies are improving quickly, and real-robot evaluation remains the standard evidence for that progress. It still relies on a human to reset the scene between rollouts, which consumes operator time and leaves the initial state distribution unspecified, so results reproduce poorly. A recent system, AutoEval, automates both reset and scoring, but only for single-step tasks, because a long-horizon rollout can terminate in combinatorially many configurations that no single learned reset policy covers. We present **HALTER**, a Harness for Autonomous Long-horizon Task Evaluation and Reset, which restores the scene by planning over a library of learned atomic reset skills, so demonstration cost scales with the size of that library rather than with the number of terminal states. HALTER builds a spatial scene graph online from point clouds and vision foundation models, and an LLM reasons over this graph to score the rollout, plan the reset, and verify that the reset succeeded, without collecting labeled success images for any task. On four long-horizon tasks on a Franka arm, HALTER restores the scene in **76%** of episodes, against 52% for AutoEval and 65% for a motion-planning reset, and it estimates the completed-skill fraction correctly in **90%** of episodes, against 76%. Its reset-verification verdict is correct in **91%** of episodes, compared with 78% for AutoEval. It also cuts the operator time of an evaluation campaign by **72%** relative to manual reset. We further measure compositional generalization on three held-out tasks, where HALTER resets **74.7%** of episodes against 1.3% for a per-task reset policy, and we ablate the scene representation and the graph update rate.
+Robot manipulation policies are improving quickly, and real-robot evaluation remains the standard evidence for that progress. It still relies on a human to reset the scene between rollouts, which consumes operator time and leaves the initial state distribution unspecified, so results reproduce poorly. A recent system, AutoEval, automates both reset and scoring, but only for single-step tasks, because a long-horizon rollout can terminate in combinatorially many configurations that no single learned reset policy covers. We present **HALTER**, a Harness for Autonomous Long-horizon Task Evaluation and Reset, which restores the scene by planning over a library of learned atomic reset skills, so demonstration cost scales with the size of that library rather than with the number of terminal states. HALTER builds a spatial scene graph online from point clouds and vision foundation models, and an LLM reasons over this graph to score the rollout, plan the reset, and verify that the reset succeeded, without collecting labeled success images for any task.
 
 </HighlightedSection>
 
-<p class="not-prose text-muted-foreground mx-auto mt-10 max-w-[50rem] px-6 text-center text-sm">
-  Paper, video, and code are on the way.
-</p>
+<Video
+  src={`${import.meta.env.BASE_URL}/videos/overview.mp4`}
+  poster={`${import.meta.env.BASE_URL}/videos/overview-poster.jpg`}
+  muted={false}
+  autoplay={false}
+  playsinline={false}
+  preload="none"
+/>
+
+<p class="not-prose text-muted-foreground mt-3 mb-4 text-center text-sm">Three-minute overview — sound on</p>
+
+<KeyNumbers
+  stats={[
+    { value: "76%", label: "reset success rate", sub: "four real tasks · 52% AutoEval · 65% MP skills" },
+    { value: "74.7%", label: "on held-out tasks, against 1.3%", sub: "no new demonstrations collected" },
+    { value: "72%", label: "less operator time", sub: "88 min of human effort down to 24" },
+    { value: "91%", label: "reset verification correct", sub: "the system checks its own work" },
+  ]}
+/>
+
+## Why long-horizon reset is hard
+
+Every real-robot evaluation alternates a rollout with a reset. The reset is still manual: a person walks over, puts the objects back, and starts the next episode. That costs operator time, and because no two hand-placed scenes are identical, it leaves the initial state distribution unspecified.
+
+Automating it works for single-step tasks. A long-horizon rollout breaks the recipe, because it can stop **anywhere**.
+
+<Figure>
+  <Picture slot="figure" src={teaser} alt="Left: a robot rollout alternating with a human resetting the scene. Right: a four-step drawer task shown failing at four different points, each leaving a different terminal state." />
+  <span slot="caption">A policy can fail at any step, and a task admits many valid step orderings, so the set of terminal states grows **combinatorially** with the length of the task. This four-step task fails at opening the drawer (1), at removing the lemon (2), in transit (3), and at closing the drawer (4). Both halves of an automated reset break: a single reset policy needs demonstrations that grow with the number of terminal states, and a single-image success checker reads spatial relations unreliably.</span>
+</Figure>
+
+## How HALTER works
+
+HALTER answers three questions on every episode: **score** what the policy accomplished, **plan** a reset from wherever it stopped, and **verify** that the reset actually landed. All three need to read the scene state, so the representation has to support both relation tests and planning. A raw image leaves geometry implicit in its pixels; a raw point cloud carries geometry without naming objects. HALTER uses a scene graph instead.
+
+<Figure>
+  <Picture slot="figure" src={framework} alt="HALTER system diagram: multi-view RGB-D keyframes become per-object point clouds and a serialized scene-graph history on the right, which a shared LLM interface reads to score, plan, and verify on the top left, while the planner composes atomic skills into a reset the robot executes on the bottom left." />
+  <span slot="caption">**Overview.** During a rollout, HALTER samples multi-view RGB-D keyframes, recovers a point cloud for every object, and serializes the result into a scene-graph history (right). A shared LLM interface reads that history to score task completion, to plan the reset, and to verify it (top left), and the planner composes atomic skills from the library into the plan the robot executes (bottom left).</span>
+</Figure>
+
+<TwoColumns>
+<div slot="left">
+
+### A graph built during the rollout
+
+The scene is partially observable: at the end of an episode a lemon inside a closed drawer looks the same as no lemon at all. The history that resolves the ambiguity is available to any system watching the rollout, but only a system that accumulates state **while the rollout runs** keeps it.
+
+HALTER samples RGB-D keyframes at 0.5 Hz, segments objects with GroundedSAM, and projects the masks into registered depth to recover per-object point clouds. It reads `on` from vertical proximity and support, `in` from volumetric containment.
+
+</div>
+<div slot="right">
+
+### A hierarchy over atomic skills
+
+Instead of one reset policy per task, HALTER keeps a library of atomic reset skills and **plans over it**. Twelve skills cover both scenes, at 30 to 50 demonstrations each.
+
+Because the planner composes skills rather than replaying one trajectory, demonstration cost scales with the size of the library, not with the number of states a rollout can stop in. The same library also covers tasks it was never assembled for.
+
+</div>
+</TwoColumns>
+
+## Tasks
+
+<Figure>
+  <Picture slot="figure" src={tasks} alt="Four long-horizon manipulation tasks in two tabletop scenes: two drawer tasks with a lemon and a strawberry, and two stove tasks cooking a carrot in a pot and in a pan." />
+  <span slot="caption">Four long-horizon tasks across two tabletop scenes. **Drawer-Store** opens the lower drawer, places a lemon inside, and closes it. **Drawer-Retrieve** opens the drawer, takes a strawberry out, and places it on a plate. **Pot-Cook** and **Pan-Cook** place a pot or a pan on the stove and cook a carrot in it. All experiments run on a Franka Panda with a Robotiq 2F-85 gripper and three RGB-D cameras.</span>
+</Figure>
+
+## Evaluating and resetting four real tasks
+
+Twenty-five episodes per task and method, on the same policy checkpoint under evaluation.
+
+<ResultsTable
+  groups={[{ label: "Task (%)", span: 4 }, { label: "", span: 1 }]}
+  columns={["Drawer-Store", "Drawer-Retrieve", "Pot-Cook", "Pan-Cook", "Average"]}
+  rowHeader="Method · Metric"
+  rows={[
+    { label: "AutoEval &middot; Scoring accuracy", cells: [{ value: "72" }, { value: "64" }, { value: "80" }, { value: "88" }, { value: "76.0 ± 4.3" }] },
+    { label: "AutoEval &middot; Verification accuracy", cells: [{ value: "76" }, { value: "80" }, { value: "80" }, { value: "76" }, { value: "78.0 ± 4.1" }] },
+    { label: "AutoEval &middot; Reset SR", cells: [{ value: "52" }, { value: "64" }, { value: "16" }, { value: "76" }, { value: "52.0 ± 5.0" }] },
+    { label: "MP skills &middot; Reset SR", cells: [{ value: "68" }, { value: "76" }, { value: "72" }, { value: "44" }, { value: "65.0 ± 4.8" }] },
+    { label: "HALTER &middot; Scoring accuracy", highlight: true, cells: [{ value: "100" }, { value: "96" }, { value: "80" }, { value: "84" }, { value: "90.0 ± 3.0", strong: true, tone: "positive" }] },
+    { label: "HALTER &middot; Plan validity", highlight: true, cells: [{ value: "92" }, { value: "84" }, { value: "72" }, { value: "88" }, { value: "84.0 ± 3.7", strong: true }] },
+    { label: "HALTER &middot; Verification accuracy", highlight: true, cells: [{ value: "96" }, { value: "84" }, { value: "88" }, { value: "96" }, { value: "91.0 ± 2.9", strong: true, tone: "positive" }] },
+    { label: "HALTER &middot; Reset SR", highlight: true, cells: [{ value: "88" }, { value: "84" }, { value: "48" }, { value: "84" }, { value: "76.0 ± 4.3", strong: true, tone: "positive" }] },
+  ]}
+  caption="HALTER restores the scene in 76.0% of episodes, 24 points above AutoEval and 11 above a motion-planning reset. Pooled over the 100 episodes, the gap over AutoEval is more than three standard errors. Pot-Cook is the hardest task for every method."
+/>
+
+The point of automating reset is to spend less human time, so we also measure what the campaign costs a person.
+
+<ResultsTable
+  columns={["Interventions", "Cycle time (s/ep)", "Operator time (min)"]}
+  rows={[
+    { label: "Manual reset", cells: [{ value: "100" }, { value: "53" }, { value: "88" }] },
+    { label: "AutoEval", cells: [{ value: "46" }, { value: "104" }, { value: "44" }] },
+    { label: "MP skills", cells: [{ value: "34" }, { value: "137" }, { value: "29" }] },
+    { label: "HALTER", highlight: true, cells: [{ value: "25", strong: true, tone: "positive" }, { value: "121" }, { value: "24", strong: true, tone: "positive" }] },
+  ]}
+  caption="Across 100 episodes, HALTER cuts interventions from 100 to 25 and operator time from 88 minutes to 24, and raises the mean number of episodes between interventions from 1.0 to 4.0. LLM reasoning between reset skills makes each episode slightly longer in wall-clock time, but operator availability rather than wall-clock time bounds how many rollouts a campaign can afford."
+/>
+
+## Composing skills for held-out tasks
+
+Three tasks HALTER had never been evaluated on. They keep the same objects and change the goals: the lemon ends on the table with the drawer closed, the strawberry on the table rather than the plate, the pot on the stove with its lid on and no carrot. These goals produce terminal states that need reset sequences unlike any of the original tasks.
+
+<ResultsTable
+  groups={[{ label: "Held-out task (%)", span: 3 }, { label: "", span: 1 }]}
+  columns={["Store", "Retrieve", "Pot", "Average"]}
+  rowHeader="Method · Metric"
+  rows={[
+    { label: "AutoEval &middot; Scoring accuracy", cells: [{ value: "72" }, { value: "72" }, { value: "80" }, { value: "74.7 ± 5.0" }] },
+    { label: "AutoEval &middot; Verification accuracy", cells: [{ value: "84" }, { value: "80" }, { value: "84" }, { value: "82.7 ± 4.4" }] },
+    { label: "AutoEval &middot; Reset SR", cells: [{ value: "0" }, { value: "4" }, { value: "0" }, { value: "1.3 ± 1.3" }] },
+    { label: "HALTER &middot; Scoring accuracy", highlight: true, cells: [{ value: "100" }, { value: "100" }, { value: "84" }, { value: "94.7 ± 2.6", strong: true, tone: "positive" }] },
+    { label: "HALTER &middot; Plan validity", highlight: true, cells: [{ value: "92" }, { value: "96" }, { value: "80" }, { value: "89.3 ± 3.6", strong: true, tone: "positive" }] },
+    { label: "HALTER &middot; Verification accuracy", highlight: true, cells: [{ value: "96" }, { value: "92" }, { value: "88" }, { value: "92.0 ± 3.1", strong: true, tone: "positive" }] },
+    { label: "HALTER &middot; Reset SR", highlight: true, cells: [{ value: "84" }, { value: "84" }, { value: "56" }, { value: "74.7 ± 5.0", strong: true, tone: "positive" }] },
+  ]}
+  caption="HALTER reaches 74.7% reset SR without a single new demonstration. AutoEval reaches 1.3%, because it fits one reset policy to the skill sequence of the task it was trained on, and that sequence no longer applies. A library of atomic skills recombines into a new order; a single policy cannot."
+/>
+
+## What the graph buys
+
+<Figure>
+  <Picture slot="figure" src={ablation} alt="Two panels. Left: grouped bars comparing the full model against images only and rendered point clouds across four metrics. Right: line chart of the four metrics as the graph update rate drops from 0.5 Hz to 0.066 Hz." />
+  <span slot="caption">Ablation on Drawer-Store, 25 episodes per configuration. **(a)** Replacing the graph with the images themselves lowers plan validity from 92% to 72%, verification accuracy from 96% to 76%, and reset SR from 88% to 72%. Rendered point clouds lower them further, to 40%, 52%, and 40%. The gain does not come from three-dimensional appearance, but from turning geometry into explicit relations. **(b)** As the update rate drops, plan validity and reset SR fall while scoring accuracy stays flat: a plan needs the states the rollout passed through, whereas the completion score can often be recovered from the last few keyframes.</span>
+</Figure>
+
+## Limitations
+
+- **The skill library has to cover the reset.** A reset may need a skill the rollout never performs, which more demonstrations would supply. Or the rollout may leave the scene physically unrecoverable, as when an object breaks or a liquid spills, which no planner over manipulation skills can undo. In that second case HALTER detects rather than recovers: the post-reset check fails and calls an operator, so an unrecoverable state costs human time instead of silently starting the next rollout from the wrong initial condition.
+- **A handful of reference cases per task.** The reasoner still needs in-context examples written for each task, although it trains no classifier and collects no labeled images.
+- **Executing a reset is itself a long-horizon problem.** The difficulties known from that setting carry over to the skills HALTER composes. Our focus here is on bringing the long-horizon setting into the reset problem itself.
+
+<HighlightedSection>
+
+## Takeaway
+
+- **Problem.** Real-robot evaluation still needs a human between every rollout, and a long-horizon rollout can stop in combinatorially many terminal states, which breaks the single-reset-policy recipe.
+- **Method.** Build a spatial scene graph online during the rollout, and let an LLM read that graph to score the episode, plan a reset over a library of atomic skills, and verify the result.
+- **Result.** 76% reset success across four real tasks, 72% less operator time, and 74.7% on held-out tasks that cost no new demonstrations.
+
+</HighlightedSection>
+
+## BibTeX
+
+```text
+@article{jiang2026halter,
+  title={From Rollout to Reset: A Graph-Based Harness for Autonomous Long-Horizon Manipulation Evaluation},
+  author={Jiang, Jing and Yang, Yue and Jiang, Xinkai and Bertasius, Gedas and Szafir, Daniel J. and Lioutikov, Rudolf},
+  journal={arXiv preprint arXiv:2609.19413},
+  year={2026}
+}
+```

@@ -32,7 +32,16 @@ const prefix = baseUrl.endsWith("/") ? baseUrl : baseUrl + "/";
 const canonical = new URL(prefix, Astro.site).href;
 const ogImage = thumbnail ? new URL(prefix + thumbnail, Astro.site).href : undefined;
 
-const navItems = [{ id: "abstract", label: "Abstract" }];
+const navItems = [
+  { id: "why-long-horizon-reset-is-hard", label: "Problem" },
+  { id: "how-halter-works", label: "Method" },
+  { id: "tasks", label: "Tasks" },
+  { id: "evaluating-and-resetting-four-real-tasks", label: "Results" },
+  { id: "composing-skills-for-held-out-tasks", label: "Held-out tasks" },
+  { id: "what-the-graph-buys", label: "Ablation" },
+  { id: "limitations", label: "Limitations" },
+  { id: "bibtex", label: "Cite" },
+];
 
 const authors = [
   "Jing Jiang",
@@ -103,6 +112,10 @@ const paperTitle =
     {ogImage && <meta name="twitter:image" content={ogImage} />}
 
     {/* Google Scholar indexes these. */}
+    <meta
+      name="citation_pdf_url"
+      content="https://arxiv.org/pdf/2609.19413"
+    />
     <meta name="citation_title" content={paperTitle} />
     {authors.map((author) => <meta name="citation_author" content={author} />)}
 
@@ -136,7 +149,10 @@ const paperTitle =
     <PageNav
       items={navItems}
       short="HALTER"
-      links={[{ name: "Code", url: "https://github.com/YY-GX/HALTER" }]}
+      links={[
+        { name: "arXiv", url: "https://arxiv.org/abs/2609.19413" },
+        { name: "Code", url: "https://github.com/YY-GX/HALTER" },
+      ]}
     />
     <main id="top">
       <Content components={{ table: Table }} />
