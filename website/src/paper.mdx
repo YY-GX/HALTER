@@ -141,14 +141,14 @@ Twenty-five episodes per task and method, on the same policy checkpoint under ev
   columns={["Drawer-Store", "Drawer-Retrieve", "Pot-Cook", "Pan-Cook", "Average"]}
   rowHeader="Method · Metric"
   rows={[
-    { label: "AutoEval &middot; Scoring accuracy", cells: [{ value: "72" }, { value: "64" }, { value: "80" }, { value: "88" }, { value: "76.0 ± 4.3" }] },
-    { label: "AutoEval &middot; Verification accuracy", cells: [{ value: "76" }, { value: "80" }, { value: "80" }, { value: "76" }, { value: "78.0 ± 4.1" }] },
-    { label: "AutoEval &middot; Reset SR", cells: [{ value: "52" }, { value: "64" }, { value: "16" }, { value: "76" }, { value: "52.0 ± 5.0" }] },
-    { label: "MP skills &middot; Reset SR", cells: [{ value: "68" }, { value: "76" }, { value: "72" }, { value: "44" }, { value: "65.0 ± 4.8" }] },
-    { label: "HALTER &middot; Scoring accuracy", highlight: true, cells: [{ value: "100" }, { value: "96" }, { value: "80" }, { value: "84" }, { value: "90.0 ± 3.0", strong: true, tone: "positive" }] },
-    { label: "HALTER &middot; Plan validity", highlight: true, cells: [{ value: "92" }, { value: "84" }, { value: "72" }, { value: "88" }, { value: "84.0 ± 3.7", strong: true }] },
-    { label: "HALTER &middot; Verification accuracy", highlight: true, cells: [{ value: "96" }, { value: "84" }, { value: "88" }, { value: "96" }, { value: "91.0 ± 2.9", strong: true, tone: "positive" }] },
-    { label: "HALTER &middot; Reset SR", highlight: true, cells: [{ value: "88" }, { value: "84" }, { value: "48" }, { value: "84" }, { value: "76.0 ± 4.3", strong: true, tone: "positive" }] },
+    { label: "AutoEval &middot; Scoring acc.", cells: [{ value: "72" }, { value: "64" }, { value: "80" }, { value: "88" }, { value: "76.0", sub: "± 4.3" }] },
+    { label: "AutoEval &middot; Verif. acc.", cells: [{ value: "76" }, { value: "80" }, { value: "80" }, { value: "76" }, { value: "78.0", sub: "± 4.1" }] },
+    { label: "AutoEval &middot; Reset SR", cells: [{ value: "52" }, { value: "64" }, { value: "16" }, { value: "76" }, { value: "52.0", sub: "± 5.0" }] },
+    { label: "MP skills &middot; Reset SR", cells: [{ value: "68" }, { value: "76" }, { value: "72" }, { value: "44" }, { value: "65.0", sub: "± 4.8" }] },
+    { label: "HALTER &middot; Scoring acc.", highlight: true, cells: [{ value: "100" }, { value: "96" }, { value: "80" }, { value: "84" }, { value: "90.0", sub: "± 3.0", strong: true, tone: "positive" }] },
+    { label: "HALTER &middot; Plan validity", highlight: true, cells: [{ value: "92" }, { value: "84" }, { value: "72" }, { value: "88" }, { value: "84.0", sub: "± 3.7", strong: true }] },
+    { label: "HALTER &middot; Verif. acc.", highlight: true, cells: [{ value: "96" }, { value: "84" }, { value: "88" }, { value: "96" }, { value: "91.0", sub: "± 2.9", strong: true, tone: "positive" }] },
+    { label: "HALTER &middot; Reset SR", highlight: true, cells: [{ value: "88" }, { value: "84" }, { value: "48" }, { value: "84" }, { value: "76.0", sub: "± 4.3", strong: true, tone: "positive" }] },
   ]}
   caption="HALTER restores the scene in 76.0% of episodes, 24 points above AutoEval and 11 above a motion-planning reset. Pooled over the 100 episodes, the gap over AutoEval is more than three standard errors. Pot-Cook is the hardest task for every method."
 />
@@ -175,13 +175,13 @@ Three tasks HALTER had never been evaluated on. They keep the same objects and c
   columns={["Store", "Retrieve", "Pot", "Average"]}
   rowHeader="Method · Metric"
   rows={[
-    { label: "AutoEval &middot; Scoring accuracy", cells: [{ value: "72" }, { value: "72" }, { value: "80" }, { value: "74.7 ± 5.0" }] },
-    { label: "AutoEval &middot; Verification accuracy", cells: [{ value: "84" }, { value: "80" }, { value: "84" }, { value: "82.7 ± 4.4" }] },
-    { label: "AutoEval &middot; Reset SR", cells: [{ value: "0" }, { value: "4" }, { value: "0" }, { value: "1.3 ± 1.3" }] },
-    { label: "HALTER &middot; Scoring accuracy", highlight: true, cells: [{ value: "100" }, { value: "100" }, { value: "84" }, { value: "94.7 ± 2.6", strong: true, tone: "positive" }] },
-    { label: "HALTER &middot; Plan validity", highlight: true, cells: [{ value: "92" }, { value: "96" }, { value: "80" }, { value: "89.3 ± 3.6", strong: true, tone: "positive" }] },
-    { label: "HALTER &middot; Verification accuracy", highlight: true, cells: [{ value: "96" }, { value: "92" }, { value: "88" }, { value: "92.0 ± 3.1", strong: true, tone: "positive" }] },
-    { label: "HALTER &middot; Reset SR", highlight: true, cells: [{ value: "84" }, { value: "84" }, { value: "56" }, { value: "74.7 ± 5.0", strong: true, tone: "positive" }] },
+    { label: "AutoEval &middot; Scoring acc.", cells: [{ value: "72" }, { value: "72" }, { value: "80" }, { value: "74.7", sub: "± 5.0" }] },
+    { label: "AutoEval &middot; Verif. acc.", cells: [{ value: "84" }, { value: "80" }, { value: "84" }, { value: "82.7", sub: "± 4.4" }] },
+    { label: "AutoEval &middot; Reset SR", cells: [{ value: "0" }, { value: "4" }, { value: "0" }, { value: "1.3", sub: "± 1.3" }] },
+    { label: "HALTER &middot; Scoring acc.", highlight: true, cells: [{ value: "100" }, { value: "100" }, { value: "84" }, { value: "94.7", sub: "± 2.6", strong: true, tone: "positive" }] },
+    { label: "HALTER &middot; Plan validity", highlight: true, cells: [{ value: "92" }, { value: "96" }, { value: "80" }, { value: "89.3", sub: "± 3.6", strong: true, tone: "positive" }] },
+    { label: "HALTER &middot; Verif. acc.", highlight: true, cells: [{ value: "96" }, { value: "92" }, { value: "88" }, { value: "92.0", sub: "± 3.1", strong: true, tone: "positive" }] },
+    { label: "HALTER &middot; Reset SR", highlight: true, cells: [{ value: "84" }, { value: "84" }, { value: "56" }, { value: "74.7", sub: "± 5.0", strong: true, tone: "positive" }] },
   ]}
   caption="HALTER reaches 74.7% reset SR without a single new demonstration. AutoEval reaches 1.3%, because it fits one reset policy to the skill sequence of the task it was trained on, and that sequence no longer applies. A library of atomic skills recombines into a new order; a single policy cannot."
 />
